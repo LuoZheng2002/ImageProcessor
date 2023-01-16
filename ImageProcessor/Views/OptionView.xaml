@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="ImageProcessor.Views.OptionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ImageProcessor"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:vms="clr-namespace:ImageProcessor.ViewModels"
+             xmlns:views="clr-namespace:ImageProcessor.Views"
+             xmlns:smoothvms="clr-namespace:ImageProcessor.ViewModels.Smooth"
+             xmlns:smoothviews="clr-namespace:ImageProcessor.Views.Smooth" 
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type vms:MethodViewModel}">
+            <views:MethodView/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Smooth Methods:" FontSize="20" Height="30"/>
+        <ComboBox Grid.Row="1" ItemsSource="{Binding SmoothMethods}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" PassEventArgsToCommand="True"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ComboBox>
+        <ContentControl Grid.Row="2" Content="{Binding CurrentViewModel}"/>
+    </Grid>
+</UserControl>
